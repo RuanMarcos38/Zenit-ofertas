@@ -3,407 +3,150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zênite Ofertas | Grupo VIP de Promoções Reais no WhatsApp</title>
-  <meta name="description" content="Entre gratuitamente no Grupo VIP da Zênite Ofertas e receba promoções reais, achados selecionados e oportunidades de compra direto no WhatsApp." />
-  <meta name="keywords" content="Zênite Ofertas, grupo de ofertas, promoções no WhatsApp, ofertas reais, descontos, achados úteis, grupo VIP de promoções" />
+  <title>Zênite Ofertas | Grupo VIP de Ofertas no WhatsApp</title>
+  <meta name="description" content="Cadastre-se gratuitamente na Zênite Ofertas e entre no Grupo VIP do WhatsApp para receber ofertas reais, promoções selecionadas e achados úteis." />
+  <meta name="keywords" content="Zênite Ofertas, grupo de ofertas, ofertas no WhatsApp, promoções reais, grupo VIP de ofertas, descontos" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#020817" />
-  <meta property="og:title" content="Zênite Ofertas | Grupo VIP de Promoções Reais" />
-  <meta property="og:description" content="Cadastre-se gratuitamente e receba ofertas selecionadas direto no WhatsApp." />
-  <meta property="og:type" content="website" />
   <style>
     :root{
-      --bg:#020817;
-      --bg-2:#061632;
-      --surface:#07142d;
-      --surface-2:#0b1f45;
-      --card:rgba(255,255,255,.07);
-      --card-strong:rgba(255,255,255,.105);
-      --line:rgba(255,255,255,.14);
-      --line-strong:rgba(255,255,255,.22);
-      --text:#f8fbff;
-      --text-soft:#dbeafe;
-      --muted:#a5b4d1;
-      --cyan:#54cfff;
-      --cyan-2:#1aa8ff;
-      --yellow:#ffc928;
-      --yellow-2:#e5aa00;
-      --green:#25d366;
-      --danger:#ff7b7b;
-      --shadow:0 24px 70px rgba(0,0,0,.36);
-      --shadow-soft:0 16px 42px rgba(0,0,0,.25);
-      --radius-sm:10px;
-      --radius-md:16px;
-      --radius-lg:22px;
-      --radius-xl:30px;
-      --container:min(1120px, calc(100% - 32px));
-      --font:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      --font-display:Arial, Inter, ui-sans-serif, system-ui, sans-serif;
+      --bg:#020817;--card:rgba(5,15,35,.72);--card2:rgba(255,255,255,.08);--line:rgba(255,255,255,.16);
+      --text:#fff;--soft:#dbeafe;--muted:#9fb1cf;--cyan:#54cfff;--yellow:#ffc928;--yellow2:#e5aa00;--green:#25d366;
+      --shadow:0 28px 80px rgba(0,0,0,.42);--radius:22px;--font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     }
-
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
     button,input{font:inherit}
-    button{cursor:pointer}
-    ::selection{background:rgba(84,207,255,.28);color:#fff}
-
-    .skip-link{position:absolute;left:16px;top:-80px;z-index:999;padding:12px 16px;border-radius:var(--radius-sm);background:#fff;color:#020817;font-weight:800;transition:.2s ease}
-    .skip-link:focus{top:16px;outline:3px solid var(--cyan)}
-    .container{width:var(--container);margin-inline:auto}
-    .section{padding:72px 0}
-    .section-title{max-width:760px;margin:0 auto 32px;text-align:center}
-    .section-title small{display:inline-block;margin-bottom:12px;color:var(--cyan);font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-    .section-title h2{font-family:var(--font-display);font-size:clamp(1.85rem,5vw,3rem);line-height:1.12;letter-spacing:-.035em;color:#fff}
-    .section-title p{margin-top:14px;color:var(--muted);font-size:1rem;line-height:1.75}
-
-    .site-header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(2,8,23,.78);backdrop-filter:blur(18px)}
-    .header-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{display:inline-flex;align-items:center;gap:12px;min-height:44px}
-    .brand img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid var(--line-strong);box-shadow:0 0 22px rgba(84,207,255,.24)}
-    .brand strong{display:block;font-family:var(--font-display);font-size:.98rem;line-height:1;color:#fff;font-weight:900;letter-spacing:.01em}
-    .brand span span{display:block;margin-top:5px;color:var(--cyan);font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
-    .nav{display:none;align-items:center;gap:18px;color:var(--muted);font-size:.9rem;font-weight:700}
-    .nav a{min-height:44px;display:inline-flex;align-items:center;transition:.2s ease}
-    .nav a:hover,.nav a:focus-visible{color:#fff;outline:none}
-    .header-cta{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;border-radius:999px;background:rgba(84,207,255,.12);border:1px solid rgba(84,207,255,.34);color:#eaf9ff;font-size:.86rem;font-weight:900;transition:.2s ease}
-    .header-cta:hover,.header-cta:focus-visible{background:rgba(84,207,255,.2);transform:translateY(-1px);outline:3px solid rgba(84,207,255,.2)}
-
-    .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#020817 0%,#061632 48%,#020817 100%)}
-    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 32%,rgba(84,207,255,.18),transparent 30rem),radial-gradient(circle at 12% 22%,rgba(255,201,40,.08),transparent 22rem);pointer-events:none}
-    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr;gap:38px;align-items:center;padding:56px 0 72px}
-    .hero-copy{max-width:660px}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;min-height:34px;padding:0 13px;border-radius:999px;background:rgba(84,207,255,.11);border:1px solid rgba(84,207,255,.28);color:#e8f9ff;font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .page{min-height:100vh;position:relative;display:grid;place-items:center;overflow:hidden;padding:24px}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;filter:saturate(1.08) contrast(1.05);transform:scale(1.02)}
+    .overlay{position:absolute;inset:0;z-index:1;background:
+      linear-gradient(90deg,rgba(2,8,23,.92) 0%,rgba(2,8,23,.76) 45%,rgba(2,8,23,.46) 100%),
+      radial-gradient(circle at 75% 44%,rgba(84,207,255,.18),transparent 32rem)}
+    .container{position:relative;z-index:2;width:min(1080px,100%);display:grid;grid-template-columns:minmax(0,580px);align-items:center;min-height:calc(100vh - 48px)}
+    .brand{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;width:max-content}
+    .brand img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.18);box-shadow:0 0 28px rgba(84,207,255,.32)}
+    .brand strong{display:block;font-size:1rem;font-weight:900;letter-spacing:.02em;line-height:1;color:#fff}
+    .brand span span{display:block;margin-top:5px;color:var(--cyan);font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    .capture-card{max-width:590px;padding:30px;border-radius:var(--radius);background:linear-gradient(180deg,var(--card),rgba(3,10,26,.64));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 13px;border-radius:999px;background:rgba(84,207,255,.12);border:1px solid rgba(84,207,255,.28);color:#eaf9ff;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
     .eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(37,211,102,.14)}
-    h1{margin-top:22px;font-family:var(--font-display);font-size:clamp(2.25rem,10vw,4.6rem);line-height:1.02;letter-spacing:-.055em;color:#fff;font-weight:900}
+    h1{margin-top:18px;font-size:clamp(2.25rem,6vw,4.25rem);line-height:1.02;letter-spacing:-.055em;font-weight:950;color:#fff}
     h1 span{color:var(--cyan)}
-    .hero-copy>p{max-width:620px;margin-top:22px;color:var(--text-soft);font-size:clamp(1rem,3.2vw,1.18rem);line-height:1.78}
-    .hero-actions{display:flex;flex-direction:column;gap:12px;margin-top:28px}
-    .btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:var(--radius-sm);padding:0 18px;font-weight:900;font-size:.95rem;line-height:1;text-align:center;transition:.2s ease}
-    .btn-primary{background:linear-gradient(180deg,var(--yellow),var(--yellow-2));color:#07101f;box-shadow:0 16px 34px rgba(255,201,40,.2)}
-    .btn-secondary{background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff}
+    .lead-text{margin-top:18px;color:var(--soft);font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.72;max-width:540px}
+    .mini-benefits{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 24px}
+    .mini-benefits span{min-height:32px;display:inline-flex;align-items:center;padding:0 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#dbeafe;font-size:.78rem;font-weight:800}
+    form{display:grid;gap:12px}
+    .field{display:grid;gap:7px}
+    label{color:#f4f8ff;font-size:.8rem;font-weight:800}
+    input{width:100%;min-height:50px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(2,8,23,.62);color:#fff;padding:0 15px;outline:none;transition:.18s ease}
+    input::placeholder{color:#8295b8}
+    input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(84,207,255,.13);background:rgba(2,8,23,.78)}
+    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:4px}
+    .btn{min-height:50px;border:0;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;font-weight:900;transition:.2s ease;cursor:pointer}
+    .btn-primary{background:linear-gradient(180deg,var(--yellow),var(--yellow2));color:#07101f;box-shadow:0 16px 34px rgba(255,201,40,.22)}
     .btn-whatsapp{background:var(--green);color:#fff;box-shadow:0 16px 34px rgba(37,211,102,.2)}
-    .btn:hover,.btn:focus-visible{transform:translateY(-2px);outline:3px solid rgba(84,207,255,.24)}
-    .trust-row{display:grid;grid-template-columns:1fr;gap:10px;margin-top:30px;max-width:620px}
-    .trust-item{padding:13px 14px;border:1px solid var(--line);border-radius:var(--radius-md);background:rgba(255,255,255,.055)}
-    .trust-item strong{display:block;color:#fff;font-size:.9rem;font-weight:900}
-    .trust-item small{display:block;margin-top:4px;color:var(--muted);font-size:.8rem;line-height:1.35}
-    .hero-visual{position:relative;min-height:360px;display:grid;place-items:center}
-    .visual-glow{position:absolute;width:min(88vw,560px);height:min(88vw,560px);border-radius:50%;background:radial-gradient(circle,rgba(84,207,255,.22),transparent 68%);filter:blur(10px)}
-    .visual-card{position:relative;width:min(100%,520px);border-radius:var(--radius-xl);padding:22px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.06));box-shadow:0 30px 86px rgba(0,0,0,.45);backdrop-filter:blur(18px)}
-    .visual-card img{width:min(76vw,330px);aspect-ratio:1/1;margin:0 auto;border-radius:50%;object-fit:cover;box-shadow:0 0 46px rgba(84,207,255,.32)}
-    .visual-card:after{content:"Grupo VIP de ofertas reais";display:flex;align-items:center;justify-content:center;min-height:46px;margin-top:18px;border-radius:999px;background:rgba(2,8,23,.6);border:1px solid var(--line);color:#e8f9ff;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-
-    .benefit-grid,.steps-grid{display:grid;grid-template-columns:1fr;gap:16px}
-    .card{border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.045));box-shadow:var(--shadow-soft);padding:22px;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);border-color:rgba(84,207,255,.32)}
-    .icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(84,207,255,.12);border:1px solid rgba(84,207,255,.24);color:var(--cyan);font-weight:900;font-size:1.1rem}
-    .card h3{margin-top:18px;font-family:var(--font-display);font-size:1.15rem;line-height:1.25;color:#fff;letter-spacing:-.02em}
-    .card p{margin-top:10px;color:var(--muted);line-height:1.7;font-size:.96rem}
-    .step-number{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,var(--yellow),var(--yellow-2));color:#07101f;font-weight:900}
-
-    .capture{background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(84,207,255,.045))}
-    .capture-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-    .capture-copy h2{font-family:var(--font-display);font-size:clamp(1.9rem,7vw,3.1rem);line-height:1.1;letter-spacing:-.04em;color:#fff}
-    .capture-copy p{margin-top:16px;color:var(--text-soft);line-height:1.75}
-    .capture-list{display:grid;gap:12px;margin-top:22px;list-style:none}
-    .capture-list li{display:flex;gap:10px;align-items:flex-start;color:var(--text-soft);line-height:1.55}
-    .capture-list li:before{content:"✓";flex:0 0 24px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(37,211,102,.14);color:#8fffc2;font-weight:900}
-    .lead-form{border:1px solid rgba(255,255,255,.17);border-radius:var(--radius-xl);padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.115),rgba(255,255,255,.065));box-shadow:var(--shadow);backdrop-filter:blur(18px)}
-    .lead-form h3{font-family:var(--font-display);font-size:1.35rem;letter-spacing:-.02em;color:#fff}
-    .lead-form>p{margin-top:8px;margin-bottom:18px;color:var(--muted);line-height:1.55;font-size:.95rem}
-    .field{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-    .field label{font-size:.82rem;color:#f4f8ff;font-weight:800}
-    .field input{width:100%;min-height:50px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.16);background:rgba(2,8,23,.56);color:#fff;padding:0 15px;outline:none;transition:.18s ease;font-size:.98rem}
-    .field input::placeholder{color:#8295b8}
-    .field input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(84,207,255,.12);background:rgba(2,8,23,.76)}
-    .error{min-height:18px;margin-top:-6px;margin-bottom:8px;color:var(--danger);font-size:.8rem;font-weight:700}
-    .form-status{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--radius-sm);background:rgba(37,211,102,.13);border:1px solid rgba(37,211,102,.24);color:#b9ffd2;font-weight:800;line-height:1.45}
-    .privacy{margin-top:12px;color:#8fa4c9;font-size:.78rem;line-height:1.55}
-
-    .faq{background:rgba(255,255,255,.025)}
-    .faq-list{max-width:850px;margin:0 auto;display:grid;gap:12px}
-    .faq-item{border:1px solid var(--line);border-radius:var(--radius-md);background:rgba(255,255,255,.055);overflow:hidden}
-    .faq-button{width:100%;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 18px;border:0;background:transparent;color:#fff;text-align:left;font-weight:900;font-size:1rem}
-    .faq-button span:last-child{flex:0 0 28px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(84,207,255,.12);color:var(--cyan);transition:.2s ease}
-    .faq-button:hover,.faq-button:focus-visible{outline:3px solid rgba(84,207,255,.2);outline-offset:-3px}
-    .faq-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease}
-    .faq-panel>div{overflow:hidden}
-    .faq-panel p{padding:0 18px 18px;color:var(--muted);line-height:1.7}
-    .faq-item.is-open .faq-panel{grid-template-rows:1fr}
-    .faq-item.is-open .faq-button span:last-child{transform:rotate(45deg)}
-
-    .final-cta{text-align:center;background:linear-gradient(135deg,rgba(84,207,255,.08),rgba(255,201,40,.06))}
-    .final-cta h2{max-width:820px;margin:0 auto;font-family:var(--font-display);font-size:clamp(2rem,8vw,3.4rem);line-height:1.1;letter-spacing:-.045em}
-    .final-cta p{max-width:680px;margin:16px auto 26px;color:var(--text-soft);line-height:1.75}
-    .footer{padding:30px 0;border-top:1px solid rgba(255,255,255,.09);background:#020817;color:var(--muted)}
-    .footer-inner{display:flex;flex-direction:column;gap:14px;align-items:flex-start;justify-content:space-between;font-size:.88rem;line-height:1.5}
-    .footer a{color:#dbeafe;font-weight:800}
-    .footer a:hover,.footer a:focus-visible{color:var(--cyan);outline:none}
-
-    @media (min-width:700px){
-      .hero-actions{flex-direction:row}.trust-row{grid-template-columns:repeat(3,1fr)}.benefit-grid,.steps-grid{grid-template-columns:repeat(3,1fr)}.capture-grid{grid-template-columns:.9fr 1.1fr}.lead-form{padding:26px}.nav{display:flex}.footer-inner{flex-direction:row;align-items:center}
-    }
-    @media (min-width:1024px){
-      .hero-grid{grid-template-columns:1.05fr .95fr;gap:56px;padding:78px 0 96px}.section{padding:88px 0}.hero-visual{min-height:540px}.visual-card{padding:28px}.lead-form{padding:30px}.header-cta{padding:0 20px}
-    }
-    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+    .btn:hover,.btn:focus-visible{transform:translateY(-2px);outline:3px solid rgba(84,207,255,.22)}
+    .privacy{margin-top:10px;color:var(--muted);font-size:.76rem;line-height:1.5}
+    .status{margin-top:10px;padding:11px 13px;border-radius:12px;background:rgba(37,211,102,.13);border:1px solid rgba(37,211,102,.25);color:#b9ffd2;font-weight:800;font-size:.86rem}
+    footer{position:absolute;left:24px;right:24px;bottom:16px;z-index:2;color:rgba(219,234,254,.72);font-size:.78rem}
+    @media(min-width:760px){.actions{grid-template-columns:1fr 1fr}.capture-card{padding:34px}.container{margin-left:clamp(0px,4vw,54px)}}
+    @media(max-width:640px){.page{padding:16px}.container{min-height:auto;padding:18px 0 52px}.capture-card{padding:22px}.brand{margin-bottom:18px}.overlay{background:linear-gradient(180deg,rgba(2,8,23,.90),rgba(2,8,23,.78))}.hero-video{opacity:.72}footer{left:16px;right:16px;text-align:center}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
   </style>
 </head>
 <body>
-  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
-
-  <header class="site-header" aria-label="Cabeçalho principal">
-    <div class="container header-inner">
-      <a href="#inicio" class="brand" aria-label="Zênite Ofertas - início">
-        <img src="assets/zenite-logo.webp" alt="Logo da Zênite Ofertas" width="56" height="56" loading="lazy" decoding="async" />
-        <span><strong>ZÊNITE OFERTAS</strong><span>Grupo VIP</span></span>
-      </a>
-      <nav class="nav" aria-label="Navegação principal">
-        <a href="#beneficios">Benefícios</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <a class="header-cta" href="#captacao">Entrar no grupo</a>
-    </div>
-  </header>
-
-  <main id="conteudo">
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Ofertas selecionadas todos os dias</span>
-          <h1 id="hero-title">Receba <span>ofertas reais</span> direto no WhatsApp</h1>
-          <p>Entre gratuitamente no Grupo VIP da Zênite Ofertas e acompanhe promoções verificadas, achados úteis e oportunidades de compra antes que os descontos acabem.</p>
-          <div class="hero-actions" aria-label="Ações principais">
-            <a class="btn btn-primary" href="#captacao">Quero receber ofertas</a>
-            <a class="btn btn-secondary" href="#como-funciona">Ver como funciona</a>
-          </div>
-          <div class="trust-row" aria-label="Diferenciais da Zênite Ofertas">
-            <div class="trust-item"><strong>Gratuito</strong><small>Sem mensalidade para entrar no grupo.</small></div>
-            <div class="trust-item"><strong>Selecionado</strong><small>Achados filtrados para economizar tempo.</small></div>
-            <div class="trust-item"><strong>Direto</strong><small>Receba tudo no WhatsApp, sem complicação.</small></div>
-          </div>
+  <main class="page" aria-labelledby="hero-title">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="overlay" aria-hidden="true"></div>
+    <section class="container">
+      <div class="capture-card">
+        <a class="brand" href="#" aria-label="Zênite Ofertas">
+          <img src="assets/zenite-logo.webp" alt="Logo da Zênite Ofertas" width="54" height="54" loading="eager" decoding="async" />
+          <span><strong>ZÊNITE OFERTAS</strong><span>Grupo VIP</span></span>
+        </a>
+        <span class="eyebrow">Entrada gratuita</span>
+        <h1 id="hero-title">Receba <span>ofertas reais</span> no WhatsApp</h1>
+        <p class="lead-text">Cadastre-se para entrar no Grupo VIP da Zênite Ofertas e acompanhar promoções selecionadas, achados úteis e oportunidades antes que acabem.</p>
+        <div class="mini-benefits" aria-label="Benefícios rápidos">
+          <span>Ofertas selecionadas</span>
+          <span>Acesso rápido</span>
+          <span>Direto no WhatsApp</span>
         </div>
-        <div class="hero-visual" aria-label="Identidade visual Zênite Ofertas">
-          <div class="visual-glow" aria-hidden="true"></div>
-          <figure class="visual-card">
-            <img src="assets/zenite-logo.webp" alt="Símbolo visual da Zênite Ofertas em destaque" width="330" height="330" loading="lazy" decoding="async" />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="beneficios" aria-labelledby="beneficios-title">
-      <div class="container">
-        <div class="section-title">
-          <small>Benefícios</small>
-          <h2 id="beneficios-title">Uma curadoria de ofertas para quem quer comprar melhor</h2>
-          <p>O foco é reduzir ruído, evitar perda de tempo e entregar oportunidades relevantes em um canal simples e rápido.</p>
-        </div>
-        <div class="benefit-grid">
-          <article class="card"><div class="icon" aria-hidden="true">1</div><h3>Promoções em tempo certo</h3><p>Receba alertas quando surgirem oportunidades interessantes, com comunicação direta e objetiva.</p></article>
-          <article class="card"><div class="icon" aria-hidden="true">2</div><h3>Achados úteis e reais</h3><p>Ofertas organizadas para facilitar sua decisão, sem excesso de mensagens e sem complicação.</p></article>
-          <article class="card"><div class="icon" aria-hidden="true">3</div><h3>Acesso pelo WhatsApp</h3><p>Entre no grupo e acompanhe tudo pelo aplicativo que você já usa no dia a dia.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="como-funciona" aria-labelledby="funciona-title">
-      <div class="container">
-        <div class="section-title">
-          <small>Como funciona</small>
-          <h2 id="funciona-title">Cadastro rápido, acesso simples e ofertas no grupo</h2>
-          <p>Em poucos segundos você libera o acesso e começa a acompanhar as oportunidades divulgadas pela Zênite Ofertas.</p>
-        </div>
-        <div class="steps-grid">
-          <article class="card"><div class="step-number">01</div><h3>Preencha seus dados</h3><p>Informe nome, e-mail e telefone com DDD para identificar seu cadastro de entrada.</p></article>
-          <article class="card"><div class="step-number">02</div><h3>Entre no Grupo VIP</h3><p>Após validar o formulário, você será direcionado para o grupo oficial no WhatsApp.</p></article>
-          <article class="card"><div class="step-number">03</div><h3>Acompanhe as ofertas</h3><p>Veja promoções selecionadas e aproveite quando fizer sentido para você.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section capture" id="captacao" aria-labelledby="captacao-title">
-      <div class="container capture-grid">
-        <div class="capture-copy">
-          <h2 id="captacao-title">Garanta seu acesso gratuito ao Grupo VIP</h2>
-          <p>Cadastre-se agora para receber o link oficial de entrada no grupo da Zênite Ofertas.</p>
-          <ul class="capture-list">
-            <li>Cadastro simples e rápido.</li>
-            <li>Redirecionamento para o WhatsApp após validação.</li>
-            <li>Comunicação direta para receber promoções e achados selecionados.</li>
-          </ul>
-        </div>
-        <form class="lead-form" id="leadForm" novalidate aria-label="Formulário de captação de leads">
-          <h3>Entrar no Grupo VIP</h3>
-          <p>Preencha seus dados para liberar o acesso.</p>
+        <form id="leadForm" novalidate>
           <div class="field">
             <label for="nome">Nome completo</label>
-            <input id="nome" name="nome" type="text" placeholder="Digite seu nome completo" autocomplete="name" required aria-describedby="nomeErro" />
+            <input id="nome" name="nome" type="text" placeholder="Digite seu nome completo" autocomplete="name" required />
           </div>
-          <p class="error" id="nomeErro" aria-live="polite"></p>
           <div class="field">
             <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required aria-describedby="emailErro" />
+            <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required />
           </div>
-          <p class="error" id="emailErro" aria-live="polite"></p>
           <div class="field">
             <label for="telefone">Telefone com DDD</label>
-            <input id="telefone" name="telefone" type="tel" inputmode="numeric" placeholder="(47) 99999-9999" autocomplete="tel" required aria-describedby="telefoneErro" />
+            <input id="telefone" name="telefone" type="tel" inputmode="numeric" placeholder="(47) 99999-9999" autocomplete="tel" required />
           </div>
-          <p class="error" id="telefoneErro" aria-live="polite"></p>
-          <button class="btn btn-primary" type="submit">Liberar meu acesso</button>
-          <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t" target="_blank" rel="noopener noreferrer">Entrar direto pelo WhatsApp</a>
-          <p class="privacy">Seus dados são usados apenas para identificação do cadastro e acesso ao grupo. Não solicitamos senha ou dados bancários.</p>
-          <p class="form-status" id="formStatus" aria-live="polite">Cadastro validado. Redirecionando para o WhatsApp...</p>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Liberar acesso</button>
+            <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t" target="_blank" rel="noopener noreferrer">Entrar no grupo</a>
+          </div>
+          <p class="privacy">Seus dados são usados apenas para identificação do cadastro e acesso ao grupo. Não solicitamos senha, cartão ou dados bancários.</p>
+          <p class="status" id="formStatus" hidden>Cadastro validado. Redirecionando para o WhatsApp...</p>
         </form>
       </div>
     </section>
-
-    <section class="section faq" id="faq" aria-labelledby="faq-title">
-      <div class="container">
-        <div class="section-title">
-          <small>Perguntas frequentes</small>
-          <h2 id="faq-title">Dúvidas antes de entrar?</h2>
-          <p>Veja as respostas principais sobre o Grupo VIP da Zênite Ofertas.</p>
-        </div>
-        <div class="faq-list">
-          <article class="faq-item">
-            <button class="faq-button" type="button" aria-expanded="false"><span>O grupo é gratuito?</span><span aria-hidden="true">+</span></button>
-            <div class="faq-panel"><div><p>Sim. O acesso ao grupo é gratuito. Basta preencher seus dados e entrar pelo link oficial do WhatsApp.</p></div></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-button" type="button" aria-expanded="false"><span>Que tipo de oferta vou receber?</span><span aria-hidden="true">+</span></button>
-            <div class="faq-panel"><div><p>Você poderá receber promoções, achados úteis e oportunidades de compra selecionadas para facilitar sua economia no dia a dia.</p></div></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-button" type="button" aria-expanded="false"><span>Preciso comprar algo para entrar?</span><span aria-hidden="true">+</span></button>
-            <div class="faq-panel"><div><p>Não. O cadastro serve apenas para liberar seu acesso ao grupo. Você decide se deseja aproveitar alguma oferta divulgada.</p></div></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-button" type="button" aria-expanded="false"><span>Meus dados ficam seguros?</span><span aria-hidden="true">+</span></button>
-            <div class="faq-panel"><div><p>Os dados informados são usados somente para identificação do cadastro. A página não solicita senha, cartão ou dados bancários.</p></div></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section final-cta" aria-labelledby="final-title">
-      <div class="container">
-        <h2 id="final-title">Entre agora e acompanhe ofertas antes que acabem</h2>
-        <p>Faça seu cadastro gratuito e receba o acesso ao Grupo VIP da Zênite Ofertas no WhatsApp.</p>
-        <a class="btn btn-primary" href="#captacao">Quero entrar no Grupo VIP</a>
-      </div>
-    </section>
+    <footer>© <span id="year"></span> Zênite Ofertas · Grupo VIP de promoções reais</footer>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Zênite Ofertas. Todos os direitos reservados.</p>
-      <a href="#inicio">Voltar ao topo</a>
-    </div>
-  </footer>
-
   <script>
-    const GROUP_URL = 'https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t';
-    const form = document.getElementById('leadForm');
-    const tel = document.getElementById('telefone');
-    const statusEl = document.getElementById('formStatus');
-    const errors = {
-      nome: document.getElementById('nomeErro'),
-      email: document.getElementById('emailErro'),
-      telefone: document.getElementById('telefoneErro')
-    };
+    const GROUP_URL='https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t';
+    const form=document.getElementById('leadForm');
+    const tel=document.getElementById('telefone');
+    const statusEl=document.getElementById('formStatus');
+    const video=document.getElementById('heroVideo');
+    document.getElementById('year').textContent=new Date().getFullYear();
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    tel.addEventListener('input', () => {
-      let v = tel.value.replace(/\D/g, '').slice(0, 11);
-      if (v.length > 10) tel.value = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-      else if (v.length > 6) tel.value = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-      else if (v.length > 2) tel.value = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-      else tel.value = v;
-    });
-
-    function setError(field, message) {
-      errors[field].textContent = message || '';
-      document.getElementById(field).setAttribute('aria-invalid', message ? 'true' : 'false');
+    async function carregarVideoHero(){
+      const partes=['assets/hero-video-01.b64','assets/hero-video-02.b64','assets/hero-video-03.b64','assets/hero-video-04.b64','assets/hero-video-05.b64'];
+      try{
+        const textos=await Promise.all(partes.map(p=>fetch(p,{cache:'force-cache'}).then(r=>r.ok?r.text():'')));
+        const b64=textos.join('').replace(/\s+/g,'');
+        if(!b64) return;
+        const bin=atob(b64);
+        const bytes=new Uint8Array(bin.length);
+        for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+        video.src=URL.createObjectURL(new Blob([bytes],{type:'video/mp4'}));
+        video.muted=true;
+        video.defaultMuted=true;
+        video.play().catch(()=>{});
+      }catch(e){ console.warn('Vídeo da hero indisponível', e); }
     }
+    carregarVideoHero();
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const telefone = tel.value.replace(/\D/g, '');
-      let valid = true;
-
-      setError('nome', '');
-      setError('email', '');
-      setError('telefone', '');
-
-      if (nome.length < 5) {
-        setError('nome', 'Digite seu nome completo.');
-        valid = false;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setError('email', 'Digite um e-mail válido.');
-        valid = false;
-      }
-      if (telefone.length < 10) {
-        setError('telefone', 'Digite seu telefone com DDD.');
-        valid = false;
-      }
-      if (!valid) return;
-
-      localStorage.setItem('zenite_lead', JSON.stringify({ nome, email, telefone: tel.value, data: new Date().toISOString() }));
-      statusEl.style.display = 'block';
-      setTimeout(() => { window.location.href = GROUP_URL; }, 700);
+    tel.addEventListener('input',()=>{
+      let v=tel.value.replace(/\D/g,'').slice(0,11);
+      if(v.length>10) tel.value=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+      else if(v.length>6) tel.value=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
+      else if(v.length>2) tel.value=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
+      else tel.value=v;
     });
 
-    document.querySelectorAll('.faq-button').forEach((button) => {
-      button.addEventListener('click', () => {
-        const item = button.closest('.faq-item');
-        const isOpen = item.classList.toggle('is-open');
-        button.setAttribute('aria-expanded', String(isOpen));
-      });
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const nome=document.getElementById('nome').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const fone=tel.value.replace(/\D/g,'');
+      if(nome.length<5){ alert('Digite seu nome completo.'); return; }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Digite um e-mail válido.'); return; }
+      if(fone.length<10){ alert('Digite seu telefone com DDD.'); return; }
+      localStorage.setItem('zenite_lead',JSON.stringify({nome,email,telefone:tel.value,data:new Date().toISOString()}));
+      statusEl.hidden=false;
+      setTimeout(()=>{ window.location.href=GROUP_URL; },650);
     });
   </script>
 </body>
 </html>
-
 <!--
-PROMPT COMPLETO PARA GERAR VÍDEO HERO NO SEEDANCE 2.0
-
-Create a premium seamless loop hero video for a professional landing page for "Zênite Ofertas", using the attached brand logo image as the main visual reference. The visual identity must preserve the circular blue logo, the yellow shopping cart icon, the metallic blue gradients, and the premium dark blue background atmosphere.
-
-Technical requirements:
-- Resolution: 720p, 16:9.
-- Duration: 6 to 8 seconds.
-- No audio, no music, no sound effects.
-- Perfect infinite loop.
-- The first frame and the final frame must be exactly the same image and composition.
-- No subtitles, no captions, no written text, no watermark.
-- Smooth, modern and professional motion only.
-
-Visual direction:
-- Dark premium background inspired by deep navy blue and subtle cyan light.
-- Center the Zênite Ofertas logo as the hero visual anchor.
-- Add soft cinematic lighting, subtle blue glow, gentle reflections and a refined glossy atmosphere.
-- The logo should have a slow floating movement, very subtle scale breathing, and delicate light sweep across the surface.
-- Add minimal particles or soft bokeh lights in the background, moving slowly and naturally.
-- Avoid artificial-looking effects, exaggerated neon, distorted logo, morphing, extra objects, random text or unrealistic elements.
-- The design must feel like a senior designer created a high-performance website hero video.
-
-Camera and motion:
-- Locked camera with very subtle depth movement.
-- Smooth ease-in-out motion.
-- Loop must return perfectly to the original composition.
-- Start and end with the logo centered, same size, same lighting and same background position.
-
-Use case:
-- The video will be used as a hero background or hero visual highlight on a landing page for lead capture to a WhatsApp offers group.
-- It must leave enough visual calm area for headline, CTA and form overlay if needed.
+PROMPT SEEDANCE 2.0 — HERO VIDEO
+Create a premium seamless loop video for a landing page hero using the attached Zênite Ofertas logo as reference. 720p, 16:9, no sound, no subtitles, no watermark. The first frame and final frame must be exactly the same for perfect autoplay loop. Use a dark navy premium background, subtle cyan glow, soft reflections, gentle floating motion, slow light sweep across the logo, minimal particles and a modern professional look. Preserve the logo identity, colors and details. Camera locked, smooth ease-in-out movement, 6 to 8 seconds, realistic design made for a high-conversion lead capture page.
 -->
