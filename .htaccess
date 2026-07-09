@@ -1,4 +1,4 @@
-# Zênite Ofertas - configuração para hospedagem Apache/Hostinger
+# Zênite Ofertas - Hostinger/Apache
 Options -Indexes
 DirectoryIndex index.html
 
@@ -15,7 +15,7 @@ DirectoryIndex index.html
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml image/webp
 </IfModule>
 
 <IfModule mod_expires.c>
@@ -23,7 +23,5 @@ DirectoryIndex index.html
   ExpiresByType text/html "access plus 1 hour"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
 </IfModule>
