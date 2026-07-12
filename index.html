@@ -12,7 +12,7 @@
       --bg:#020817;
       --text:#ffffff;
       --soft:#dbeafe;
-      --muted:#a8b7d6;
+      --muted:#9fb1cf;
       --cyan:#54cfff;
       --green:#25d366;
       --yellow:#ffc928;
@@ -20,9 +20,9 @@
       --danger:#ff9a9a;
       --success:#9fffc0;
       --line:rgba(84,207,255,.24);
-      --glass:rgba(3,14,34,.42);
-      --glass2:rgba(3,14,34,.62);
-      --shadow:0 22px 70px rgba(0,0,0,.34);
+      --glass:rgba(3,14,34,.46);
+      --glass2:rgba(3,14,34,.66);
+      --shadow:0 24px 74px rgba(0,0,0,.34);
       --font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     }
 
@@ -49,7 +49,7 @@
       object-fit:cover;
       object-position:center center;
       z-index:0;
-      transform:scale(1.045);
+      transform:scale(1.035);
       filter:saturate(1.08) contrast(1.04) brightness(.98);
     }
 
@@ -59,21 +59,33 @@
       z-index:1;
       pointer-events:none;
       background:
-        linear-gradient(90deg,rgba(2,8,23,.88) 0%,rgba(2,8,23,.66) 24%,rgba(2,8,23,.18) 48%,rgba(2,8,23,.16) 72%,rgba(2,8,23,.58) 100%),
-        linear-gradient(180deg,rgba(2,8,23,.08) 0%,rgba(2,8,23,.38) 100%);
+        linear-gradient(90deg,rgba(2,8,23,.88) 0%,rgba(2,8,23,.70) 20%,rgba(2,8,23,.20) 42%,rgba(2,8,23,.10) 60%,rgba(2,8,23,.44) 82%,rgba(2,8,23,.70) 100%),
+        linear-gradient(180deg,rgba(2,8,23,.06) 0%,rgba(2,8,23,.34) 100%);
+    }
+
+    .decor-mask{
+      position:absolute;
+      z-index:1;
+      right:-78px;
+      bottom:-86px;
+      width:min(28vw,390px);
+      height:min(24vw,300px);
+      pointer-events:none;
+      background:radial-gradient(ellipse at 76% 74%,rgba(2,8,23,.98) 0%,rgba(2,8,23,.82) 30%,rgba(2,8,23,.38) 58%,transparent 82%);
     }
 
     .hero-shell{
       position:relative;
       z-index:2;
+      width:100%;
+      max-width:1360px;
       min-height:100vh;
-      width:min(1280px,100%);
       margin:0 auto;
-      padding:clamp(28px,4vw,56px) clamp(24px,5vw,72px);
+      padding:clamp(28px,4.4vw,64px) clamp(22px,5vw,78px);
       display:grid;
-      grid-template-columns:minmax(290px,360px) minmax(260px,1fr) minmax(270px,315px);
+      grid-template-columns:minmax(260px,330px) minmax(420px,1fr) minmax(260px,300px);
       grid-template-rows:auto 1fr;
-      column-gap:clamp(34px,6vw,96px);
+      column-gap:clamp(42px,7vw,112px);
       align-items:center;
     }
 
@@ -93,8 +105,8 @@
     }
 
     .brand img{
-      width:50px;
-      height:50px;
+      width:48px;
+      height:48px;
       border-radius:50%;
       object-fit:cover;
       border:1px solid rgba(255,255,255,.18);
@@ -105,17 +117,18 @@
     .brand strong{
       display:block;
       color:#fff;
-      font-size:.94rem;
+      font-size:.9rem;
       line-height:1;
       font-weight:900;
       letter-spacing:.02em;
+      white-space:nowrap;
     }
 
     .brand small{
       display:block;
       margin-top:6px;
       color:var(--cyan);
-      font-size:.58rem;
+      font-size:.56rem;
       line-height:1;
       font-weight:900;
       letter-spacing:.16em;
@@ -133,7 +146,7 @@
       background:rgba(84,207,255,.12);
       border:1px solid rgba(84,207,255,.30);
       color:#eaf9ff;
-      font-size:.62rem;
+      font-size:.6rem;
       font-weight:900;
       letter-spacing:.08em;
       text-transform:uppercase;
@@ -153,44 +166,45 @@
       grid-column:1;
       grid-row:2;
       align-self:center;
-      max-width:360px;
-      margin-top:26px;
+      width:100%;
+      max-width:330px;
+      padding-bottom:clamp(18px,4vh,46px);
     }
 
     h1{
-      max-width:355px;
+      max-width:320px;
       color:#fff;
-      font-size:clamp(1.76rem,3.15vw,2.72rem);
-      line-height:1.11;
-      letter-spacing:-.034em;
+      font-size:clamp(1.68rem,2.78vw,2.48rem);
+      line-height:1.12;
+      letter-spacing:-.032em;
       font-weight:900;
     }
 
     h1 span{color:var(--cyan)}
 
     .support-text{
-      max-width:345px;
-      margin-top:15px;
+      max-width:315px;
+      margin-top:14px;
       color:var(--soft);
-      font-size:clamp(.86rem,.95vw,.94rem);
-      line-height:1.66;
+      font-size:clamp(.82rem,.86vw,.92rem);
+      line-height:1.68;
     }
 
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top:22px;
+      margin-top:20px;
     }
 
     .btn{
-      min-height:44px;
+      min-height:42px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       border-radius:12px;
-      padding:0 20px;
-      font-size:.86rem;
+      padding:0 18px;
+      font-size:.82rem;
       font-weight:900;
       text-align:center;
       transition:.2s ease;
@@ -198,21 +212,26 @@
       backdrop-filter:blur(10px);
     }
 
-    .btn-whatsapp{background:rgba(37,211,102,.90);color:#fff;box-shadow:0 14px 28px rgba(37,211,102,.18)}
+    .btn-whatsapp{
+      background:rgba(37,211,102,.90);
+      color:#fff;
+      box-shadow:0 14px 28px rgba(37,211,102,.18);
+    }
+
     .btn:hover,.btn:focus-visible{transform:translateY(-2px);outline:3px solid rgba(84,207,255,.20)}
 
     .note{
-      max-width:310px;
-      margin-top:12px;
-      color:rgba(219,234,254,.70);
-      font-size:.69rem;
+      max-width:300px;
+      margin-top:11px;
+      color:rgba(219,234,254,.68);
+      font-size:.67rem;
       line-height:1.45;
     }
 
     .video-clear-zone{
       grid-column:2;
       grid-row:1/3;
-      min-height:68vh;
+      min-height:72vh;
       pointer-events:none;
     }
 
@@ -220,11 +239,11 @@
       grid-column:3;
       grid-row:1/3;
       width:100%;
-      max-width:315px;
+      max-width:300px;
       justify-self:end;
       align-self:center;
-      padding:16px;
-      border-radius:18px;
+      padding:15px;
+      border-radius:17px;
       background:linear-gradient(180deg,var(--glass),var(--glass2));
       border:1px solid var(--line);
       box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08);
@@ -233,7 +252,7 @@
 
     .lead-card h2{
       color:#fff;
-      font-size:.98rem;
+      font-size:.94rem;
       line-height:1.2;
       font-weight:900;
       letter-spacing:-.01em;
@@ -241,45 +260,38 @@
 
     .lead-card>p{
       margin-top:6px;
-      margin-bottom:12px;
+      margin-bottom:11px;
       color:var(--muted);
-      font-size:.76rem;
-      line-height:1.48;
+      font-size:.72rem;
+      line-height:1.46;
     }
 
-    form{display:grid;gap:8px}
-    .field{display:grid;gap:5px}
-    label{color:#f5f8ff;font-size:.7rem;font-weight:850}
+    form{display:grid;gap:7px}
+    .field{display:grid;gap:4px}
+    label{color:#f5f8ff;font-size:.68rem;font-weight:850}
 
     input{
       width:100%;
-      min-height:40px;
+      min-height:38px;
       border-radius:10px;
       border:1px solid rgba(255,255,255,.16);
       background:rgba(2,8,23,.62);
       color:#fff;
-      padding:0 11px;
+      padding:0 10px;
       outline:none;
       transition:.18s ease;
-      font-size:.82rem;
+      font-size:.8rem;
     }
 
     input::placeholder{color:#8295b8}
     input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(84,207,255,.13);background:rgba(2,8,23,.78)}
 
-    .form-message{
-      min-height:16px;
-      color:var(--danger);
-      font-size:.7rem;
-      line-height:1.35;
-      font-weight:800;
-    }
-
+    .form-message{min-height:15px;color:var(--danger);font-size:.68rem;line-height:1.35;font-weight:800}
     .form-message.success{color:var(--success)}
 
     .form-cta{
       width:100%;
-      min-height:42px;
+      min-height:40px;
       border:0;
       border-radius:10px;
       background:linear-gradient(180deg,var(--yellow),var(--yellow2));
@@ -287,34 +299,28 @@
       font-weight:950;
       box-shadow:0 14px 28px rgba(255,201,40,.18);
       transition:.2s ease;
-      font-size:.84rem;
+      font-size:.82rem;
     }
 
     .form-cta:hover,.form-cta:focus-visible{transform:translateY(-2px);outline:3px solid rgba(84,207,255,.20)}
 
-    .privacy{
-      color:rgba(219,234,254,.68);
-      font-size:.6rem;
-      line-height:1.42;
-      text-align:center;
-    }
+    .privacy{color:rgba(219,234,254,.66);font-size:.58rem;line-height:1.38;text-align:center}
 
-    @media(max-width:1040px){
+    @media(max-width:1100px){
       .hero-shell{
-        grid-template-columns:minmax(280px,390px) 1fr;
-        grid-template-rows:auto auto;
-        row-gap:22px;
+        grid-template-columns:minmax(260px,350px) minmax(260px,1fr);
+        grid-template-rows:auto auto auto;
+        row-gap:20px;
       }
+
       .top-left{grid-column:1;grid-row:1}
-      .copy-area{grid-column:1;grid-row:2;margin-top:0}
-      .video-clear-zone{grid-column:2;grid-row:1/3;min-height:60vh}
-      .lead-card{grid-column:1/3;grid-row:3;max-width:390px;justify-self:start;margin-top:6px}
+      .copy-area{grid-column:1;grid-row:2;align-self:end;padding-bottom:0}
+      .video-clear-zone{grid-column:2;grid-row:1/4;min-height:62vh}
+      .lead-card{grid-column:1;grid-row:3;max-width:350px;justify-self:start;align-self:start;margin-top:4px}
     }
 
-    @media(max-width:720px){
-      .hero{
-        min-height:100svh;
-      }
+    @media(max-width:760px){
+      .hero{min-height:100svh}
       .hero-shell{
         min-height:100svh;
         padding:22px 18px 36px;
@@ -323,24 +329,27 @@
         gap:18px;
         align-content:end;
       }
+
       .top-left{grid-column:1;grid-row:1;gap:14px}
-      .copy-area{grid-column:1;grid-row:2;align-self:end;max-width:420px;margin-top:0}
+      .copy-area{grid-column:1;grid-row:2;align-self:end;max-width:410px;padding-bottom:0}
       .video-clear-zone{display:none}
-      .lead-card{grid-column:1;grid-row:3;max-width:420px;justify-self:start;margin-top:0}
+      .lead-card{grid-column:1;grid-row:3;max-width:410px;justify-self:start;margin-top:0}
+
       .hero-overlay{background:linear-gradient(180deg,rgba(2,8,23,.14) 0%,rgba(2,8,23,.86) 100%)}
-      h1{max-width:385px;font-size:clamp(1.86rem,9vw,2.7rem)}
-      .support-text{max-width:380px}
-      .hero-actions{display:grid;grid-template-columns:1fr;width:100%;max-width:380px}
+      .decor-mask{display:none}
+      h1{max-width:380px;font-size:clamp(1.82rem,8.6vw,2.58rem)}
+      .support-text{max-width:375px}
+      .hero-actions{display:grid;grid-template-columns:1fr;width:100%;max-width:375px}
       .btn{width:100%}
     }
 
     @media(max-width:520px){
-      .brand img{width:46px;height:46px}
-      .brand strong{font-size:.88rem}
-      .brand small{font-size:.56rem}
-      .badge{font-size:.6rem}
-      .lead-card{padding:15px;border-radius:18px}
-      h1{letter-spacing:-.032em}
+      .brand img{width:45px;height:45px}
+      .brand strong{font-size:.86rem}
+      .brand small{font-size:.54rem}
+      .badge{font-size:.58rem}
+      .lead-card{padding:14px;border-radius:17px}
+      h1{letter-spacing:-.03em}
     }
 
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -353,22 +362,26 @@
     </video>
 
     <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="decor-mask" aria-hidden="true"></div>
 
     <section class="hero-shell">
-      <header class="top-left">
+      <div class="top-left">
         <a class="brand" href="#" aria-label="Zênite Ofertas">
-          <img src="assets/zenite-logo.webp" alt="Logo da Zênite Ofertas" width="50" height="50" />
+          <img src="assets/zenite-logo.webp" alt="Logo da Zênite Ofertas" width="48" height="48" />
           <span><strong>ZÊNITE OFERTAS</strong><small>Grupo VIP</small></span>
         </a>
+
         <div class="badge">Entrada gratuita</div>
-      </header>
+      </div>
 
       <div class="copy-area">
         <h1 id="hero-title">Receba <span>ofertas reais</span> no WhatsApp</h1>
         <p class="support-text">Cadastre-se e entre no Grupo VIP da Zênite Ofertas para acompanhar promoções antes que acabem.</p>
+
         <div class="hero-actions">
           <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t" target="_blank" rel="noopener noreferrer">Entrar no grupo</a>
         </div>
+
         <p class="note">Acesso gratuito ao grupo oficial de ofertas.</p>
       </div>
 
@@ -377,10 +390,23 @@
       <aside class="lead-card" aria-label="Formulário de captura de lead">
         <h2>Libere seu acesso</h2>
         <p>Preencha seus dados e entre no Grupo VIP da Zênite Ofertas.</p>
+
         <form id="leadForm" novalidate>
-          <div class="field"><label for="nome">Nome completo</label><input id="nome" name="nome" type="text" placeholder="Digite seu nome" autocomplete="name" required /></div>
-          <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required /></div>
-          <div class="field"><label for="telefone">Telefone com DDD</label><input id="telefone" name="telefone" type="tel" inputmode="numeric" placeholder="(47) 99999-9999" autocomplete="tel" required /></div>
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" type="text" placeholder="Digite seu nome" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="telefone">Telefone com DDD</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="numeric" placeholder="(47) 99999-9999" autocomplete="tel" required />
+          </div>
+
           <p class="form-message" id="formMessage" aria-live="polite"></p>
           <button class="form-cta" type="submit">Liberar acesso</button>
           <p class="privacy">Seus dados são usados apenas para identificação do cadastro e acesso ao grupo.</p>
@@ -401,24 +427,25 @@
       try{
         const textos=await Promise.all(partes.map((p)=>fetch(p,{cache:'force-cache'}).then((r)=>r.ok?r.text():'')));
         const b64=textos.join('').replace(/\s+/g,'');
-        if(!b64) return;
+        if(!b64)return;
         const bin=atob(b64);
         const bytes=new Uint8Array(bin.length);
-        for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+        for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
         video.src=URL.createObjectURL(new Blob([bytes],{type:'video/mp4'}));
         video.muted=true;
         video.defaultMuted=true;
         video.play().catch(()=>{});
       }catch(error){console.warn('Vídeo de fundo não carregado.',error)}
     }
+
     video.addEventListener('error',carregarVideoDoGitHubSeNecessario,{once:true});
-    setTimeout(()=>{if(!video.currentSrc||video.readyState===0) carregarVideoDoGitHubSeNecessario()},700);
+    setTimeout(()=>{if(!video.currentSrc||video.readyState===0)carregarVideoDoGitHubSeNecessario()},700);
 
     telefone.addEventListener('input',()=>{
       let v=telefone.value.replace(/\D/g,'').slice(0,11);
-      if(v.length>10) telefone.value=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-      else if(v.length>6) telefone.value=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
-      else if(v.length>2) telefone.value=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
+      if(v.length>10)telefone.value=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+      else if(v.length>6)telefone.value=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
+      else if(v.length>2)telefone.value=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
       else telefone.value=v;
     });
 
