@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Zênite Ofertas</title>
+  <desc id="desc">Capa azul da Zênite Ofertas exibida enquanto o vídeo carrega.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020817"/>
+      <stop offset="0.52" stop-color="#082b68"/>
+      <stop offset="1" stop-color="#020817"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#1aa8ff" stop-opacity="0.48"/>
+      <stop offset="0.58" stop-color="#0b4ab5" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#020817" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <ellipse cx="800" cy="420" rx="610" ry="380" fill="url(#glow)" filter="url(#blur)"/>
+  <path d="M610 338l190-155 190 155h-102l-88-72-88 72z" fill="#ffffff" fill-opacity="0.9"/>
+  <text x="800" y="520" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="168" font-weight="900" letter-spacing="8" fill="#ffffff">ZÊNITE</text>
+  <text x="800" y="665" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="900" letter-spacing="17" fill="#54cfff">OFERTAS</text>
+  <text x="800" y="748" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="10" fill="#dbeafe">GRUPO VIP</text>
+</svg>
