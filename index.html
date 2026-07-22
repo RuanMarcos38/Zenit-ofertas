@@ -16,8 +16,7 @@
       --bg:#020817;
       --bg-soft:#06142e;
       --surface:rgba(4,17,39,.86);
-      --surface-strong:rgba(3,14,34,.95);
-      --text:#ffffff;
+      --text:#fff;
       --soft:#dbeafe;
       --muted:#9fb1cf;
       --cyan:#54cfff;
@@ -27,7 +26,6 @@
       --danger:#ff9a9a;
       --success:#9fffc0;
       --line:rgba(84,207,255,.25);
-      --white-line:rgba(255,255,255,.14);
       --shadow:0 24px 70px rgba(0,0,0,.38);
       --font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     }
@@ -55,7 +53,7 @@
     .badge{min-height:34px;display:inline-flex;align-items:center;gap:9px;padding:0 14px;border-radius:999px;background:rgba(84,207,255,.1);border:1px solid rgba(84,207,255,.34);color:#eaf9ff;font-size:.65rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(12px);white-space:nowrap}
     .badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(37,211,102,.13)}
 
-    .hero-grid{flex:1;display:grid;grid-template-columns:minmax(250px,.8fr) minmax(430px,1.45fr) minmax(320px,.92fr);grid-template-areas:"copy video form";gap:clamp(22px,2.3vw,38px);align-items:center;padding:12px 0 10px}
+    .hero-grid{flex:1;display:grid;grid-template-columns:minmax(250px,.78fr) minmax(460px,1.55fr) minmax(320px,.9fr);grid-template-areas:"copy video form";gap:clamp(24px,2.5vw,42px);align-items:center;padding:12px 0 10px}
     .hero-copy,.hero-media,.capture-side{min-width:0}
     .hero-copy{grid-area:copy;max-width:390px;justify-self:start}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;color:var(--cyan);font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
@@ -72,11 +70,12 @@
     .btn:hover,.btn:focus-visible{transform:translateY(-2px);outline:3px solid rgba(84,207,255,.2);outline-offset:2px}
     .note{max-width:330px;margin-top:13px;color:rgba(219,234,254,.67);font-size:.72rem;line-height:1.5}
 
-    .hero-media{grid-area:video;position:relative;width:100%;justify-self:center}
-    .hero-media::before{content:"";position:absolute;inset:8% 10%;z-index:-1;border-radius:50%;background:rgba(84,207,255,.18);filter:blur(48px);pointer-events:none}
-    .video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:clamp(20px,2vw,30px);background:#020817;border:1px solid rgba(255,255,255,.17);box-shadow:0 34px 90px rgba(0,0,0,.5),0 0 52px rgba(84,207,255,.12)}
-    .video-frame video{width:100%;height:100%;object-fit:cover;object-position:center;background:#020817}
-    .video-frame::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -60px 80px rgba(2,8,23,.18)}
+    .hero-media{grid-area:video;position:relative;width:100%;max-width:820px;justify-self:center}
+    .hero-media::before{content:"";position:absolute;inset:8% 8%;z-index:-1;border-radius:50%;background:rgba(84,207,255,.2);filter:blur(52px);pointer-events:none}
+    .video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:clamp(20px,2vw,30px);background:#020817;border:1px solid rgba(255,255,255,.18);box-shadow:0 36px 96px rgba(0,0,0,.52),0 0 58px rgba(84,207,255,.16)}
+    .video-frame video{width:100%;height:100%;object-fit:cover;object-position:center;background:#020817;transform:translateZ(0)}
+    .video-frame::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -60px 80px rgba(2,8,23,.12)}
+    .video-frame.is-playing{border-color:rgba(84,207,255,.36);box-shadow:0 38px 100px rgba(0,0,0,.54),0 0 70px rgba(84,207,255,.2)}
     .video-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;padding:0 4px;color:var(--muted);font-size:.74rem;line-height:1.4}
     .video-footer strong{color:#eaf9ff;font-size:.76rem}
     .live-indicator{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:var(--cyan);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.62rem}
@@ -173,10 +172,8 @@
         </div>
 
         <div class="hero-media" aria-label="Vídeo institucional da Zênite Ofertas">
-          <div class="video-frame">
-            <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.svg" disablepictureinpicture>
-              <source src="video.mp4" type="video/mp4" />
-            </video>
+          <div class="video-frame" id="videoFrame">
+            <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/hero-poster.svg" disablepictureinpicture aria-label="Animação da marca Zênite Ofertas em loop"></video>
           </div>
           <div class="video-footer">
             <strong>Zênite Ofertas em movimento</strong>
@@ -213,40 +210,116 @@
 
   <script>
     const video=document.getElementById('heroVideo');
+    const videoFrame=document.getElementById('videoFrame');
     const form=document.getElementById('leadForm');
     const telefone=document.getElementById('telefone');
     const formMessage=document.getElementById('formMessage');
     const submitButton=document.getElementById('submitButton');
     const GROUP_URL='https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t';
-    let fallbackCarregado=false;
+    const VIDEO_PARTS=[
+      'assets/hero-video-01.b64',
+      'assets/hero-video-02.b64',
+      'assets/hero-video-03.b64',
+      'assets/hero-video-04.b64',
+      'assets/hero-video-05.b64'
+    ];
+    const VIDEO_VERSION='20260722-hero-loop-2';
+    let videoObjectUrl='';
+    let retomadaPendente=false;
 
-    async function carregarVideoDoGitHubSeNecessario(){
-      if(fallbackCarregado)return;
-      fallbackCarregado=true;
-      const partes=['assets/hero-video-01.b64','assets/hero-video-02.b64','assets/hero-video-03.b64','assets/hero-video-04.b64','assets/hero-video-05.b64'];
-      try{
-        const textos=await Promise.all(partes.map((caminho)=>fetch(caminho,{cache:'force-cache'}).then((resposta)=>resposta.ok?resposta.text():'')));
-        const b64=textos.join('').replace(/\s+/g,'');
-        if(!b64)return;
-        const binario=atob(b64);
-        const bytes=new Uint8Array(binario.length);
-        for(let i=0;i<binario.length;i++)bytes[i]=binario.charCodeAt(i);
-        video.src=URL.createObjectURL(new Blob([bytes],{type:'video/mp4'}));
-        video.muted=true;
-        video.defaultMuted=true;
-        video.play().catch(()=>{});
-      }catch(error){
-        console.warn('Vídeo da hero não carregado.',error);
+    function tentarReproduzir(){
+      video.muted=true;
+      video.defaultMuted=true;
+      video.playsInline=true;
+      video.setAttribute('muted','');
+      video.setAttribute('playsinline','');
+      const promessa=video.play();
+      if(promessa&&typeof promessa.then==='function'){
+        promessa.then(()=>{
+          videoFrame.classList.add('is-playing');
+          video.removeAttribute('poster');
+          retomadaPendente=false;
+        }).catch(()=>{
+          retomadaPendente=true;
+        });
       }
     }
 
-    video.muted=true;
-    video.defaultMuted=true;
-    video.addEventListener('error',carregarVideoDoGitHubSeNecessario,{once:true});
-    setTimeout(()=>{
-      if(!video.currentSrc||video.readyState===0)carregarVideoDoGitHubSeNecessario();
-      else video.play().catch(()=>{});
-    },700);
+    function aplicarBlobNoVideo(blob){
+      if(videoObjectUrl)URL.revokeObjectURL(videoObjectUrl);
+      videoObjectUrl=URL.createObjectURL(blob);
+      video.src=videoObjectUrl;
+      video.load();
+      video.addEventListener('loadeddata',tentarReproduzir,{once:true});
+      video.addEventListener('canplay',tentarReproduzir,{once:true});
+    }
+
+    async function carregarVideoDosFragmentos(){
+      const textos=await Promise.all(VIDEO_PARTS.map(async(caminho)=>{
+        const resposta=await fetch(`${caminho}?v=${VIDEO_VERSION}`,{cache:'no-store'});
+        if(!resposta.ok)throw new Error(`Fragmento não encontrado: ${caminho}`);
+        const texto=await resposta.text();
+        if(!texto.trim())throw new Error(`Fragmento vazio: ${caminho}`);
+        return texto;
+      }));
+
+      const base64=textos.join('').replace(/\s+/g,'');
+      if(!base64)throw new Error('Vídeo sem conteúdo.');
+
+      const binario=atob(base64);
+      const bytes=new Uint8Array(binario.length);
+      for(let i=0;i<binario.length;i++)bytes[i]=binario.charCodeAt(i);
+      aplicarBlobNoVideo(new Blob([bytes],{type:'video/mp4'}));
+    }
+
+    function carregarVideoDiretoComoFallback(){
+      video.src=`video.mp4?v=${VIDEO_VERSION}`;
+      video.load();
+      video.addEventListener('loadeddata',tentarReproduzir,{once:true});
+      video.addEventListener('canplay',tentarReproduzir,{once:true});
+    }
+
+    async function iniciarHeroVideo(){
+      video.muted=true;
+      video.defaultMuted=true;
+      video.playsInline=true;
+      try{
+        await carregarVideoDosFragmentos();
+      }catch(error){
+        console.warn('Falha ao montar o vídeo pelos fragmentos. Tentando arquivo direto.',error);
+        carregarVideoDiretoComoFallback();
+      }
+    }
+
+    video.addEventListener('playing',()=>{
+      videoFrame.classList.add('is-playing');
+      video.removeAttribute('poster');
+      retomadaPendente=false;
+    });
+
+    video.addEventListener('ended',()=>{
+      video.currentTime=0;
+      tentarReproduzir();
+    });
+
+    video.addEventListener('pause',()=>{
+      if(document.visibilityState==='visible'&&!video.ended){
+        retomadaPendente=true;
+        setTimeout(tentarReproduzir,250);
+      }
+    });
+
+    document.addEventListener('visibilitychange',()=>{
+      if(document.visibilityState==='visible')tentarReproduzir();
+    });
+
+    ['pointerdown','touchstart','keydown'].forEach((evento)=>{
+      window.addEventListener(evento,()=>{
+        if(retomadaPendente||video.paused)tentarReproduzir();
+      },{passive:true});
+    });
+
+    iniciarHeroVideo();
 
     telefone.addEventListener('input',()=>{
       let valor=telefone.value.replace(/\D/g,'').slice(0,11);
