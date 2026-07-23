@@ -31,8 +31,8 @@ $script = <<<'HTML'
   const formMessage = document.getElementById('formMessage');
   const submitButton = document.getElementById('submitButton');
   const GROUP_URL = 'https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t';
-  const VERSION = '20260723-hero-visible-3';
-  const VIDEO_URL = `assets/hero-video.mp4?v=${VERSION}`;
+  const VERSION = '20260723-hero-visible-4';
+  const VIDEO_URL = `assets/hero-video.php?v=${VERSION}`;
   const PARTS = Array.from(
     { length: 10 },
     (_, index) => `assets/hero-upload-${String(index + 1).padStart(2, '0')}.b64`
@@ -143,7 +143,7 @@ $script = <<<'HTML'
 
     window.setTimeout(() => {
       if (video.readyState < 2) loadFallbackVideo();
-    }, 1100);
+    }, 1500);
   }
 
   configureVideo();
