@@ -5,198 +5,85 @@ on:
     branches:
       - main
     paths:
-      - '.github/fullscreen-background-trigger'
-      - 'index.html'
+      - '.github/hero-video-trigger'
+      - '.github/workflows/build-hero-video.yml'
+      - 'assets/hero-upload-*.b64'
+      - 'assets/hero-video-*.b64'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
-jobs:
-  apply-background:
-    if: github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+concurrency:
+  group: build-hero-video-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
 
+jobs:
+  build-video:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout pull request branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
 
-      - name: Apply fullscreen background without changing layout
+      - name: Rebuild Hero MP4 from repository chunks
         shell: python
         run: |
           from pathlib import Path
+          import base64
           import re
 
-          path = Path('index.html')
-          html = path.read_text(encoding='utf-8')
-
-          video_path = Path('assets/hero-video.mp4')
-          if not video_path.is_file() or video_path.stat().st_size < 100_000:
-              raise SystemExit('The physical Hero MP4 is missing or invalid.')
-
-          preload = '  <link rel="preload" href="assets/hero-video.mp4?v=20260723-bg" as="video" type="video/mp4">\n'
-          if 'rel="preload" href="assets/hero-video.mp4' not in html:
-              html = html.replace('</head>', preload + '</head>', 1)
-
-          css = r'''
-
-    /* HERO_BACKGROUND_VIDEO_START */
-    .page {
-      background: #020817 url("assets/hero-poster.svg") center center / cover no-repeat;
-    }
-
-    .page-background-video {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      object-position: center;
-      pointer-events: none;
-      user-select: none;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-
-    .page::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: rgba(2, 8, 23, .52);
-      pointer-events: none;
-    }
-
-    .page::before,
-    .orb {
-      z-index: 1;
-    }
-
-    .page::before {
-      opacity: .12;
-    }
-
-    .orb {
-      opacity: .48;
-    }
-
-    .shell {
-      position: relative;
-      z-index: 2;
-    }
-
-    .media,
-    .media-card,
-    .video-frame {
-      pointer-events: none;
-    }
-
-    .media::before {
-      display: none;
-    }
-
-    .media-card {
-      background: transparent;
-      box-shadow: none;
-    }
-
-    .video-frame {
-      background: transparent;
-    }
-
-    .video-frame::after {
-      display: none;
-    }
-
-    .video-frame.is-playing {
-      box-shadow: none;
-    }
-    /* HERO_BACKGROUND_VIDEO_END */
-'''
-
-          html = re.sub(
-              r'\n\s*/\* HERO_BACKGROUND_VIDEO_START \*/.*?/\* HERO_BACKGROUND_VIDEO_END \*/\n',
-              '\n',
-              html,
-              flags=re.S,
-          )
-          html = html.replace('</style>', css + '  </style>', 1)
-
-          background_video = '''
-    <video
-      id="heroVideo"
-      class="page-background-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      webkit-playsinline
-      preload="auto"
-      poster="assets/hero-poster.svg"
-      disablepictureinpicture
-      aria-hidden="true"
-      tabindex="-1"
-    >
-      <source src="assets/hero-video.mp4?v=20260723-bg" type="video/mp4">
-    </video>
-'''
-
-          html = re.sub(
-              r'\n\s*<video\s+id="heroVideo".*?</video>\s*',
-              '\n',
-              html,
-              count=1,
-              flags=re.S,
-          )
-
-          main_open = '<main class="page" aria-labelledby="hero-title">'
-          if 'class="page-background-video"' not in html:
-              html = html.replace(main_open, main_open + background_video, 1)
-
-          path.write_text(html, encoding='utf-8')
-
-      - name: Validate final implementation
-        shell: python
-        run: |
-          from pathlib import Path
-
-          html = Path('index.html').read_text(encoding='utf-8')
-          required = [
-              'class="page-background-video"',
-              'autoplay',
-              'muted',
-              'loop',
-              'playsinline',
-              'preload="auto"',
-              'object-fit: cover',
-              'pointer-events: none',
-              'background: rgba(2, 8, 23, .52)',
-              'poster="assets/hero-poster.svg"',
-              '<source src="assets/hero-video.mp4?v=20260723-bg" type="video/mp4">',
+          asset_dir = Path('assets')
+          candidates = [
+              [asset_dir / f'hero-upload-{index:02d}.b64' for index in range(1, 11)],
+              [asset_dir / f'hero-video-{index:02d}.b64' for index in range(1, 6)],
           ]
 
-          missing = [item for item in required if item not in html]
-          if missing:
-              raise SystemExit('Validation failed: ' + ', '.join(missing))
+          valid_videos = []
 
-          if html.count('id="heroVideo"') != 1:
-              raise SystemExit('Expected exactly one Hero video element.')
+          for files in candidates:
+              if not all(path.is_file() for path in files):
+                  print('Skipping incomplete chunk set:', [str(path) for path in files])
+                  continue
 
-          print('Fullscreen video background validated successfully.')
+              print('Trying chunk set:', [path.name for path in files])
+              encoded = ''.join(
+                  re.sub(r'\s+', '', path.read_text(encoding='utf-8-sig'))
+                  for path in files
+              )
+              encoded += '=' * (-len(encoded) % 4)
 
-      - name: Commit final implementation to pull request branch
+              try:
+                  video = base64.b64decode(encoded, validate=False)
+              except Exception as error:
+                  print('Decode failed:', error)
+                  continue
+
+              if len(video) >= 100_000 and video[4:8] == b'ftyp':
+                  valid_videos.append(video)
+                  print(f'Valid MP4 candidate: {len(video):,} bytes')
+              else:
+                  print(f'Invalid candidate: {len(video):,} bytes')
+
+          if not valid_videos:
+              raise SystemExit('No valid MP4 could be reconstructed from repository chunks.')
+
+          video = max(valid_videos, key=len)
+          output = asset_dir / 'hero-video.mp4'
+          output.write_bytes(video)
+          print(f'Generated {output} with {len(video):,} bytes.')
+
+      - name: Commit generated MP4 to pull request branch
         run: |
-          if git diff --quiet -- index.html; then
-            echo 'Background implementation already applied.'
+          if git diff --quiet -- assets/hero-video.mp4; then
+            echo 'Hero video is already up to date.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html
-          git commit -m 'Apply video as fullscreen Hero background'
-          git push origin HEAD:${{ github.head_ref }}
+          git add assets/hero-video.mp4
+          git commit -m 'Build Hero video MP4'
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
