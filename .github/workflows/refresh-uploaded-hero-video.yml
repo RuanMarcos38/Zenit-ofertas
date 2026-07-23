@@ -22,17 +22,16 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Validate and refresh fullscreen background video
+      - name: Restore clean page and refresh fullscreen background video
         shell: python
         run: |
           from pathlib import Path
           import re
+          import subprocess
 
           html_path = Path('index.html')
           video_path = Path('assets/hero-video.mp4')
 
-          if not html_path.is_file():
-              raise SystemExit('index.html not found')
           if not video_path.is_file() or video_path.stat().st_size < 100_000:
               raise SystemExit('assets/hero-video.mp4 is missing or invalid')
 
@@ -40,11 +39,16 @@ jobs:
           if video[4:8] != b'ftyp':
               raise SystemExit('assets/hero-video.mp4 is not a valid MP4')
 
-          html = html_path.read_text(encoding='utf-8')
+          clean_html = subprocess.check_output(
+              ['git', 'show', 'origin/main:index.html'],
+              text=True,
+              encoding='utf-8',
+          )
+
           html = re.sub(
-              r'assets/hero-video\.mp4\?v=[^"\']+',
+              r'assets/hero-video\.mp4\?v=[A-Za-z0-9._-]+',
               'assets/hero-video.mp4?v=20260723-upload-10',
-              html,
+              clean_html,
           )
 
           required = [
@@ -59,6 +63,9 @@ jobs:
           missing = [item for item in required if item not in html]
           if missing:
               raise SystemExit(f'Missing background video requirements: {missing}')
+
+          if 'VIDEO_PARTS = Array.from' not in html:
+              raise SystemExit('The fallback video logic was unexpectedly removed')
 
           html_path.write_text(html, encoding='utf-8')
           print(f'Validated MP4: {video_path.stat().st_size:,} bytes')
