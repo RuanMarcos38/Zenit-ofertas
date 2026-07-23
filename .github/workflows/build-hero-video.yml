@@ -8,6 +8,7 @@ on:
       - '.github/hero-video-trigger'
       - '.github/workflows/build-hero-video.yml'
       - 'assets/hero-upload-*.b64'
+      - 'assets/hero-video-*.b64'
   workflow_dispatch:
 
 permissions:
@@ -35,17 +36,43 @@ jobs:
           import base64
           import re
 
-          files = sorted(Path('assets').glob('hero-upload-*.b64'))
-          if len(files) != 10:
-              raise SystemExit(f'Expected 10 video chunks, found {len(files)}.')
+          asset_dir = Path('assets')
+          candidates = [
+              [asset_dir / f'hero-upload-{index:02d}.b64' for index in range(1, 11)],
+              [asset_dir / f'hero-video-{index:02d}.b64' for index in range(1, 6)],
+          ]
 
-          encoded = ''.join(re.sub(r'\s+', '', path.read_text(encoding='utf-8')) for path in files)
-          video = base64.b64decode(encoded, validate=True)
+          valid_videos = []
 
-          if len(video) < 100_000 or video[4:8] != b'ftyp':
-              raise SystemExit('The reconstructed file is not a valid MP4.')
+          for files in candidates:
+              if not all(path.is_file() for path in files):
+                  print('Skipping incomplete chunk set:', [str(path) for path in files])
+                  continue
 
-          output = Path('assets/hero-video.mp4')
+              print('Trying chunk set:', [path.name for path in files])
+              encoded = ''.join(
+                  re.sub(r'\s+', '', path.read_text(encoding='utf-8-sig'))
+                  for path in files
+              )
+              encoded += '=' * (-len(encoded) % 4)
+
+              try:
+                  video = base64.b64decode(encoded, validate=False)
+              except Exception as error:
+                  print('Decode failed:', error)
+                  continue
+
+              if len(video) >= 100_000 and video[4:8] == b'ftyp':
+                  valid_videos.append(video)
+                  print(f'Valid MP4 candidate: {len(video):,} bytes')
+              else:
+                  print(f'Invalid candidate: {len(video):,} bytes')
+
+          if not valid_videos:
+              raise SystemExit('No valid MP4 could be reconstructed from repository chunks.')
+
+          video = max(valid_videos, key=len)
+          output = asset_dir / 'hero-video.mp4'
           output.write_bytes(video)
           print(f'Generated {output} with {len(video):,} bytes.')
 
