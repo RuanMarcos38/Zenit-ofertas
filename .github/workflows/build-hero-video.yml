@@ -12,6 +12,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: build-hero-video
+  cancel-in-progress: false
+
 jobs:
   build-video:
     runs-on: ubuntu-latest
