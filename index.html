@@ -385,7 +385,7 @@
     }
 
   </style>
-  <link rel="preload" href="assets/hero-video.mp4?v=20260723-bg-final" as="video" type="video/mp4">
+  <link rel="preload" href="assets/hero-video.mp4?v=20260723-upload-10" as="video" type="video/mp4">
 </head>
 <body>
   <main class="page" aria-labelledby="hero-title">
@@ -403,7 +403,7 @@
       aria-hidden="true"
       tabindex="-1"
     >
-      <source src="assets/hero-video.mp4?v=20260723-bg-final" type="video/mp4">
+      <source src="assets/hero-video.mp4?v=20260723-upload-10" type="video/mp4">
     </video>
 
     <span class="orb orb-a" aria-hidden="true"></span>
@@ -483,10 +483,7 @@
       const submitButton = document.getElementById('submitButton');
       const GROUP_URL = 'https://chat.whatsapp.com/Jc7FGLbhWA60NdfPItyGz5?mode=gi_t';
       const VERSION = '20260723-final-hero-1';
-      const VIDEO_FILE = `assets/hero-video.mp4?v=${VERSION}`;
-      const VIDEO_PARTS = Array.from(
-        { length: 10 },
-        (_, index) => `assets/hero-upload-${String(index + 1).padStart(2, '0')}.b64?v=${VERSION}`
+      const VIDEO_FILE = `assets/hero-video.mp4?v=20260723-upload-10'0')}.b64?v=${VERSION}`
       );
 
       let objectUrl = '';
