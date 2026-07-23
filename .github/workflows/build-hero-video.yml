@@ -1,10 +1,11 @@
 name: Build Hero Video
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
+      - '.github/hero-video-trigger'
       - '.github/workflows/build-hero-video.yml'
       - 'assets/hero-upload-*.b64'
   workflow_dispatch:
@@ -13,15 +14,19 @@ permissions:
   contents: write
 
 concurrency:
-  group: build-hero-video
+  group: build-hero-video-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
   build-video:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout pull request branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Rebuild Hero MP4 from repository chunks
         shell: python
@@ -44,7 +49,7 @@ jobs:
           output.write_bytes(video)
           print(f'Generated {output} with {len(video):,} bytes.')
 
-      - name: Commit generated MP4
+      - name: Commit generated MP4 to pull request branch
         run: |
           if git diff --quiet -- assets/hero-video.mp4; then
             echo 'Hero video is already up to date.'
@@ -54,4 +59,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/hero-video.mp4
           git commit -m 'Build Hero video MP4'
-          git push
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
