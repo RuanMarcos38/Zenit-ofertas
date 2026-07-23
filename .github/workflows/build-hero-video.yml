@@ -1,0 +1,53 @@
+name: Build Hero Video
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-hero-video.yml'
+      - 'assets/hero-upload-*.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rebuild Hero MP4 from repository chunks
+        shell: python
+        run: |
+          from pathlib import Path
+          import base64
+          import re
+
+          files = sorted(Path('assets').glob('hero-upload-*.b64'))
+          if len(files) != 10:
+              raise SystemExit(f'Expected 10 video chunks, found {len(files)}.')
+
+          encoded = ''.join(re.sub(r'\s+', '', path.read_text(encoding='utf-8')) for path in files)
+          video = base64.b64decode(encoded, validate=True)
+
+          if len(video) < 100_000 or video[4:8] != b'ftyp':
+              raise SystemExit('The reconstructed file is not a valid MP4.')
+
+          output = Path('assets/hero-video.mp4')
+          output.write_bytes(video)
+          print(f'Generated {output} with {len(video):,} bytes.')
+
+      - name: Commit generated MP4
+        run: |
+          if git diff --quiet -- assets/hero-video.mp4; then
+            echo 'Hero video is already up to date.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/hero-video.mp4
+          git commit -m 'Build Hero video MP4'
+          git push
