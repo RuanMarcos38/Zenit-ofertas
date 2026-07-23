@@ -78,7 +78,7 @@ jobs:
 
       - name: Commit generated MP4 to pull request branch
         run: |
-          if git diff --quiet -- assets/hero-video.mp4; then
+          if [ -z "$(git status --porcelain -- assets/hero-video.mp4)" ]; then
             echo 'Hero video is already up to date.'
             exit 0
           fi
