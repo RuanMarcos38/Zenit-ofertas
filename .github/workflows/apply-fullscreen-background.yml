@@ -1,9 +1,9 @@
 name: Apply Fullscreen Hero Background
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - feat/fullscreen-video-background
     paths:
       - '.github/fullscreen-background-trigger'
       - '.github/workflows/apply-fullscreen-background.yml'
@@ -13,14 +13,13 @@ permissions:
 
 jobs:
   apply-background:
-    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout pull request branch
+      - name: Checkout feature branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: feat/fullscreen-video-background
           fetch-depth: 0
 
       - name: Convert current Hero video into fullscreen background
@@ -200,4 +199,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git commit -m 'Apply fullscreen video background to Hero'
-          git push origin HEAD:${{ github.head_ref }}
+          git push origin HEAD:feat/fullscreen-video-background
