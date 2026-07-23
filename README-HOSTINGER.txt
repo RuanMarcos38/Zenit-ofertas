@@ -1,8 +1,15 @@
-ZÊNITE OFERTAS - ARQUIVO PRONTO PARA HOSPEDAGEM
+ZÊNITE OFERTAS - SITE PRONTO PARA HOSPEDAGEM
 
-1. Extraia o ZIP.
-2. Envie index.html, .htaccess e a pasta assets para a pasta public_html da Hostinger.
-3. Substitua os arquivos antigos.
-4. Limpe o cache do navegador e acesse o domínio.
+ARQUIVOS PRINCIPAIS
+- index.html
+- .htaccess
+- pasta assets
+- SEEDANCE-2-PROMPT.md
 
-A página está em sessão única, sem elementos no fundo, usando a logo oficial no Hero.
+PUBLICAÇÃO NA HOSTINGER
+1. Envie todos os arquivos e pastas para public_html.
+2. Preserve a estrutura e os nomes dos arquivos.
+3. Para trocar o vídeo, substitua assets/hero-video.mp4 mantendo exatamente esse nome.
+4. Limpe o cache da Hostinger e pressione Ctrl + F5 no navegador.
+
+O site possui layout responsivo para computador, tablet e celular. O vídeo da Hero usa autoplay, muted, loop e playsinline. Caso o MP4 local ainda não esteja publicado, o site utiliza automaticamente o vídeo armazenado no GitHub como fallback.
