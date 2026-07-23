@@ -1,0 +1,198 @@
+name: Apply Background Video Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/apply-background-now'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-background:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply fullscreen background without changing layout
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          video_path = Path('assets/hero-video.mp4')
+          if not video_path.is_file() or video_path.stat().st_size < 100_000:
+              raise SystemExit('The physical Hero MP4 is missing or invalid.')
+
+          preload = '  <link rel="preload" href="assets/hero-video.mp4?v=20260723-bg" as="video" type="video/mp4">\n'
+          if 'rel="preload" href="assets/hero-video.mp4' not in html:
+              html = html.replace('</head>', preload + '</head>', 1)
+
+          css = r'''
+
+    /* HERO_BACKGROUND_VIDEO_START */
+    .page {
+      background: #020817 url("assets/hero-poster.svg") center center / cover no-repeat;
+    }
+
+    .page-background-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center;
+      pointer-events: none;
+      user-select: none;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(2, 8, 23, .52);
+      pointer-events: none;
+    }
+
+    .page::before,
+    .orb {
+      z-index: 1;
+    }
+
+    .page::before {
+      opacity: .12;
+    }
+
+    .orb {
+      opacity: .48;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    .media,
+    .media-card,
+    .video-frame {
+      pointer-events: none;
+    }
+
+    .media::before {
+      display: none;
+    }
+
+    .media-card {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .video-frame {
+      background: transparent;
+    }
+
+    .video-frame::after {
+      display: none;
+    }
+
+    .video-frame.is-playing {
+      box-shadow: none;
+    }
+    /* HERO_BACKGROUND_VIDEO_END */
+'''
+
+          html = re.sub(
+              r'\n\s*/\* HERO_BACKGROUND_VIDEO_START \*/.*?/\* HERO_BACKGROUND_VIDEO_END \*/\n',
+              '\n',
+              html,
+              flags=re.S,
+          )
+          html = html.replace('</style>', css + '  </style>', 1)
+
+          background_video = '''
+    <video
+      id="heroVideo"
+      class="page-background-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      poster="assets/hero-poster.svg"
+      disablepictureinpicture
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <source src="assets/hero-video.mp4?v=20260723-bg" type="video/mp4">
+    </video>
+'''
+
+          html = re.sub(
+              r'\n\s*<video\s+id="heroVideo".*?</video>\s*',
+              '\n',
+              html,
+              count=1,
+              flags=re.S,
+          )
+
+          main_open = '<main class="page" aria-labelledby="hero-title">'
+          if 'class="page-background-video"' not in html:
+              html = html.replace(main_open, main_open + background_video, 1)
+
+          path.write_text(html, encoding='utf-8')
+
+      - name: Validate final Hero background
+        shell: python
+        run: |
+          from pathlib import Path
+
+          html = Path('index.html').read_text(encoding='utf-8')
+          checks = {
+              'single video': html.count('id="heroVideo"') == 1,
+              'background class': 'class="page-background-video"' in html,
+              'autoplay': 'autoplay' in html,
+              'muted': 'muted' in html,
+              'loop': 'loop' in html,
+              'playsinline': 'playsinline' in html,
+              'no controls': 'controls' not in html,
+              'cover': 'object-fit: cover' in html,
+              'pointer events': 'pointer-events: none' in html,
+              '52 percent overlay': 'background: rgba(2, 8, 23, .52)' in html,
+              'poster': 'poster="assets/hero-poster.svg"' in html,
+              'physical source': '<source src="assets/hero-video.mp4?v=20260723-bg" type="video/mp4">' in html,
+          }
+
+          failed = [name for name, passed in checks.items() if not passed]
+          if failed:
+              raise SystemExit('Validation failed: ' + ', '.join(failed))
+
+          print('All fullscreen background requirements passed.')
+
+      - name: Commit final implementation
+        run: |
+          if git diff --quiet -- index.html; then
+            echo 'Background implementation already applied.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Apply video as fullscreen Hero background'
+          git push origin main
