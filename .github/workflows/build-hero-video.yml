@@ -1,24 +1,26 @@
 name: Build Hero Video
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
-      - '.github/hero-video-trigger'
+      - '.github/fullscreen-background-trigger'
+      - 'index.html'
 
 permissions:
   contents: write
 
 jobs:
   apply-background:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main
+      - name: Checkout pull request branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
 
       - name: Apply fullscreen background without changing layout
@@ -187,7 +189,7 @@ jobs:
 
           print('Fullscreen video background validated successfully.')
 
-      - name: Commit final implementation
+      - name: Commit final implementation to pull request branch
         run: |
           if git diff --quiet -- index.html; then
             echo 'Background implementation already applied.'
@@ -197,4 +199,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git commit -m 'Apply video as fullscreen Hero background'
-          git push origin main
+          git push origin HEAD:${{ github.head_ref }}
